@@ -30,7 +30,6 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
 
         case 'user':
             $userId = $input->userId;
-
             $sql = "SELECT * FROM items WHERE user_id=$userId";
 
             if ($result = $conn->query($sql)){
