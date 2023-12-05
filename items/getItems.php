@@ -46,6 +46,27 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
                 echo "sql query failed";
             }
             break;
+
+        case 'showItem':
+            $itemId = $input->itemId;
+            $sql = "SELECT items.*, categories.category_name FROM items
+                    INNER JOIN categories ON items.category_id=categories.id WHERE items.id=$itemId LIMIT 1";
+
+            if ($result = $conn->query($sql)){
+                while($row = mysqli_fetch_assoc($result))
+                {
+                    if (isset($row['image'])) {
+                        $row['image'] = base64_encode($row['image']);
+                    }
+                    $items_array[] = $row;
+                }
+                echo json_encode($items_array);
+                $conn->close();
+            } else {
+                echo "sql query failed";
+            }
+            break;
+
         default:
             echo "Invalid Category";
 
