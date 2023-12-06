@@ -67,6 +67,37 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
             }
             break;
 
+        case 'category':
+            $categoryId = $input->category_id;
+            $sql = "SELECT * FROM items WHERE category_id=$categoryId";
+
+            if ($result = $conn->query($sql)){
+                while($row = mysqli_fetch_assoc($result))
+                {
+                    if (isset($row['image'])) {
+                        $row['image'] = base64_encode($row['image']);
+                    }
+                    $items_array[] = $row;
+                }
+                echo json_encode($items_array);
+                $conn->close();
+            } else {
+                echo "sql query failed";
+            }
+            break;
+
+        case 'getCategory':
+            $categoryId = $input->category_id;
+            $sql = "SELECT category_name FROM categories WHERE id=$categoryId";
+
+            if ($result = $conn->query($sql)){
+                echo json_encode(mysqli_fetch_assoc($result));
+                $conn->close();
+            } else {
+                echo "sql query failed";
+            }
+            break;
+
         default:
             echo "Invalid Category";
 
