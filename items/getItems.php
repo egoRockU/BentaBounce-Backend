@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
 
     switch($category){
         case 'all':
-            $sql = "SELECT * FROM items";
+            $sql = "SELECT * FROM items WHERE stocks > 0";
 
             if ($result = $conn->query($sql)){
                 while($row = mysqli_fetch_assoc($result))
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
 
         case 'category':
             $categoryId = $input->category_id;
-            $sql = "SELECT * FROM items WHERE category_id=$categoryId";
+            $sql = "SELECT * FROM items WHERE category_id=$categoryId AND stocks > 0";
 
             if ($result = $conn->query($sql)){
                 while($row = mysqli_fetch_assoc($result))

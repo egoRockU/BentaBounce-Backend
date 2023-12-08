@@ -21,23 +21,24 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
         $response = "sql_delete query failed";
     }
 
-    if (intval($count) === intval($stocks)){
-        if ($conn->query($sql_delete_item) === TRUE){
-            $response = $response . " Item out of stock, item deleted";
-        } else {
-            $response = $response . " sql_delete_item query failed";
-        }
+
+    if ($conn->query($sql_update) === TRUE){
+        $response = $response . " Item updated successfully";
     } else {
-        if ($conn->query($sql_update) === TRUE){
-            $response = $response . " Item updated successfully";
-        } else {
-            $response = $response . " sql_update query failed";
-        }
+        $response = $response . " sql_update query failed";
     }
     
     echo $response;
     $conn->close();
 
+
+    // if (intval($count) === intval($stocks)){
+    //     if ($conn->query($sql_delete_item) === TRUE){
+    //         $response = $response . " Item out of stock, item deleted";
+    //     } else {
+    //         $response = $response . " sql_delete_item query failed";
+    //     }
+    // }
 }
 
 
