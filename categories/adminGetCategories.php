@@ -4,6 +4,7 @@ require '../connection.php';
 
 if ($_SERVER['REQUEST_METHOD']=='GET'){
     $category_array = array();
+    $category_names = array();
 
     $sql = "SELECT id, category_name FROM categories";
 
@@ -13,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD']=='GET'){
                 $category_array[] = $row;
                 $category_names[] = $row['category_name'];
             }
-            echo json_encode($category_array);
+            echo json_encode(['category_array'=>$category_array, 'category_names'=>$category_names]);
             $conn->close();
     }
 
