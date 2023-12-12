@@ -79,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
                     }
                     $items_array[] = $row;
                 }
+                
                 echo json_encode($items_array);
                 $conn->close();
             } else {
