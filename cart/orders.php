@@ -4,6 +4,7 @@ require '../connection.php';
 
 $input = json_decode(file_get_contents('php://input'));
 $userId = $input->user_id;
+$order_name = $input->order_name;
 $amount = $input->amount;
 $address = $input->address;
 $recipient = $input->recipient;
@@ -25,8 +26,8 @@ $itemsToUpdate = $input->itemsToUpdate;
 
 if ($_SERVER['REQUEST_METHOD']=='POST'){
     
-    $sql_insert = "INSERT INTO orders (id, user_id, amount, address, recipient, shipping) 
-    VALUES (null, $userId, $amount, '$address', '$recipient', $shipping)";
+    $sql_insert = "INSERT INTO orders (id, user_id, items, amount, address, recipient, shipping) 
+    VALUES (null, $userId, '$order_name', $amount, '$address', '$recipient', $shipping)";
 
     if ($conn->query($sql_insert) === TRUE){
         $response = "Order created added successfully";
